@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         logButton.registerCallback(callBack , new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                TviewName.append();
+                //TviewName.append();
 
             }
 
