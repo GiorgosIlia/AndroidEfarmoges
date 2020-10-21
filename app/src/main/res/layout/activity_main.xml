@@ -58,4 +58,15 @@
         app:layout_constraintStart_toEndOf="@+id/FatsaM"
         app:layout_constraintTop_toBottomOf="@+id/tName" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FatsaM"
+        app:layout_constraintVertical_bias="0.189"
+        tools:layout_editor_absoluteX="16dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

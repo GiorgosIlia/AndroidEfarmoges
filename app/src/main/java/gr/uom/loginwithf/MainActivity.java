@@ -27,6 +27,8 @@ import com.squareup.picasso.Picasso;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -34,12 +36,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
 
     private CallbackManager callBack;
     private FirebaseAuth authenti;
     private TextView TviewName;
     private ImageView FatsaMou;
+    private ImageView FatsaMou2;
     private LoginButton logButton;
     private TextView Url;
     private FirebaseAuth.AuthStateListener authListener;
@@ -57,8 +64,10 @@ public class MainActivity extends AppCompatActivity {
         Url = findViewById(R.id.textView2);
         TviewName = findViewById(R.id.tName);
         FatsaMou = findViewById(R.id.FatsaM);
+        FatsaMou2 = findViewById(R.id.imageView2);
         logButton = findViewById(R.id.login_button);
-        logButton.setReadPermissions("email" , "public_profile");
+        logButton.setReadPermissions("email");
+        logButton.setReadPermissions("public_profile","user_photos");
 
         callBack = CallbackManager.Factory.create();
 
@@ -83,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         authListener = new FirebaseAuth.AuthStateListener(){
-
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -137,11 +145,11 @@ public class MainActivity extends AppCompatActivity {
     private void UpdateUI (FirebaseUser user){
         if(user != null ){
             TviewName.setText(user.getDisplayName());
-            if (user.getPhotoUrl() != null){
+            if (user.getPhotoUrl() != null ){
                 String photoUrl = user.getPhotoUrl().toString();
                 Url.setText(photoUrl);
-                photoUrl = photoUrl + "?type=large";
-                Picasso.get().load(photoUrl).into(FatsaMou);
+                photoUrl = photoUrl+"?type=large";
+                Picasso.get().load(photoUrl).into(FatsaMou2);
             }
             else {
                 TviewName.setText("");
@@ -163,4 +171,6 @@ public class MainActivity extends AppCompatActivity {
             authenti.removeAuthStateListener(authListener);
         }
     }
+
+
 }
